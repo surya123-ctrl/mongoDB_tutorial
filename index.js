@@ -29,6 +29,16 @@ server.post('/users', async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 })
+//put
+server.put('/users/:name', async (req, res) => {
+    console.log(req.params);
+    const db = await dbConnection();
+    const collection = db.collection('Users');
+    const singleData = await collection.updateOne({ name: req.params.name }, { $set: req.body });
+
+
+})
+
 server.listen(3000, () => {
     console.log("Server started")
 });
