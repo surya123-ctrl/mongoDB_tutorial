@@ -38,7 +38,15 @@ server.put('/users/:name', async (req, res) => {
 
 
 })
+//delete
+server.delete('/users/:name', async (req, res) => {
+    const db = await dbConnection();
+    const collection = db.collection('Users');
+    const username = req.params.name;
+    collection.deleteOne({ name: username });
+    res.send('Deleted');
 
+})
 server.listen(3000, () => {
     console.log("Server started")
 });
